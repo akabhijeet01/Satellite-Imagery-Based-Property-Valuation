@@ -1,175 +1,155 @@
-# Satellite_Imagery_Based_Property_Valuation
-🛰️ Satellite Imagery Based Property Valuation
+# 🛰️ Satellite Imagery Based Property Valuation
+### Multimodal Machine Learning Project
 
-Multimodal Machine Learning Project
+**Name:** Abhijeet Kumar  
+**Enrollment No:** 23324001  
+**Project Title:** Satellite Imagery Based Property Valuation  
 
-Name: Abhijeet Kumar
-Enrollment No: 23324001
-Project Title: Satellite Imagery Based Property Valuation
+---
 
-📌 Project Overview
+## 📌 Project Overview
 
-Accurate real estate valuation depends on both structured property attributes and environmental context.
-This project explores whether satellite imagery can improve property price prediction when combined with traditional tabular housing data.
+Accurate real estate valuation depends on both **structured property attributes** and **environmental context**.  
+This project explores whether **satellite imagery** can improve property price prediction when combined with traditional tabular housing data.
 
-A multimodal regression pipeline was developed that integrates:
+A **multimodal regression pipeline** is developed that integrates:
+- Numerical housing features (tabular data)
+- Satellite images (visual data)
 
-Numerical housing features (tabular data)
+The performance of the multimodal model is rigorously compared against a **strong tabular-only baseline**.
 
-Satellite images (visual data)
+---
 
-The performance of the multimodal model is rigorously compared against a strong tabular-only baseline.
+## 🎯 Objectives
 
-🎯 Objectives
+- Build a **tabular baseline model** for property price prediction
+- Programmatically acquire **satellite images** using geographic coordinates
+- Design a **multimodal neural network** combining images and tabular data
+- Compare performance using **RMSE** and **R²**
+- Analyze whether satellite imagery adds predictive value
+- Demonstrate scientific rigor through honest evaluation
 
-Build a tabular baseline model for property price prediction
+---
 
-Programmatically acquire satellite images using geographic coordinates
-
-Design a multimodal neural network combining images and tabular data
-
-Compare performance using RMSE and R²
-
-Analyze whether satellite imagery adds predictive value
-
-Demonstrate scientific rigor through honest evaluation
-
-📂 Project Structure
+## 📂 Project Structure
 Satellite_CDC_Project/
 │
 ├── data/
-│   ├── train.csv
-│   └── test.csv
+│ ├── train.csv
+│ └── test.csv
 │
 ├── images/
-│   ├── train/
-│   └── test/
+│ ├── train/
+│ └── test/
 │
-├── dataset.py                 # Custom PyTorch Dataset
-├── multimodal_model.py        # CNN + Tabular fusion model
-├── train_tabular_baseline.py  # Random Forest baseline
-├── train_multimodal.py        # Multimodal training script
-├── evaluate_multimodal.py     # Model comparison & metrics
-├── predict.py                 # Test set prediction
+├── dataset.py
+├── multimodal_model.py
+├── train_tabular_baseline.py
+├── train_multimodal.py
+├── evaluate_multimodal.py
+├── predict.py
 ├── requirements.txt
 ├── README.md
-└── 23324001_report.pdf        # Final project report
+└── 23324001_report.pdf
 
-📊 Dataset Description
-🔹 Tabular Features
 
-bedrooms
+---
 
-bathrooms
+## 📊 Dataset Description
 
-sqft_living
+### 🔹 Tabular Features
+- `bedrooms`
+- `bathrooms`
+- `sqft_living`
+- `grade`
+- `condition`
+- `lat`, `long`
+- `price` *(target)*
 
-grade
+### 🔹 Visual Features
+- Satellite images fetched using **Mapbox Static Images API**
+- Images resized to **128×128**
+- Normalized and processed using a pretrained CNN
 
-condition
+---
 
-lat, long
+## 🧠 Methodology
 
-price (target)
+### 1️⃣ Tabular Baseline Model
+- **Model:** Random Forest Regressor  
+- **Purpose:** Establish a strong benchmark using structured features only
 
-🔹 Visual Features
+### 2️⃣ Multimodal Model
+- **Image Encoder:** Pretrained ResNet-18 (frozen)
+- **Tabular Encoder:** Fully connected neural network
+- **Fusion:** Concatenation of image and tabular embeddings
+- **Output:** Regression head predicting house price
 
-Satellite images fetched using Mapbox Static Images API
+> CNN weights are frozen to enable efficient CPU-based training.
 
-Images resized to 128×128
+---
 
-Normalized and processed using a pretrained CNN
+## 📈 Evaluation Metrics
 
-🧠 Methodology
-1️⃣ Tabular Baseline
+- **RMSE (Root Mean Squared Error)**
+- **R² Score**
 
-Model: Random Forest Regressor
+## 🔍 Key Findings
 
-Purpose: Establish a strong, reliable benchmark
+- The **tabular baseline explains most of the variance** in house prices
+- Satellite imagery at fixed resolution **did not add useful predictive signal**
+- Multimodal model underperformed due to:
+  - Weak visual signal
+  - Generic pretrained CNN features
+  - Increased model complexity
 
-2️⃣ Multimodal Model
+These results emphasize the importance of **baseline comparison** and **critical evaluation**.
 
-Image Encoder: Pretrained ResNet-18 (frozen, used as feature extractor)
+---
 
-Tabular Encoder: Fully connected neural network
+## 📌 Conclusion
 
-Fusion: Concatenation of image + tabular embeddings
+This project demonstrates a complete **end-to-end multimodal machine learning pipeline** for property valuation.  
+Experimental results show that **structured housing attributes dominate price prediction**, while satellite imagery introduces noise rather than useful information in this setup.
 
-Output: Regression head predicting house price
+Negative results are scientifically valuable and reflect real-world modeling challenges.
 
-CNN weights are frozen to enable efficient CPU-based training.
+---
 
-🔍 Key Findings
+## 🚀 Future Work
 
-The tabular baseline explains most of the price variance
+- Fine-tuning CNNs on real estate-specific imagery (GPU required)
+- Residual modeling (predicting tabular residuals using images)
+- Handcrafted visual features (green cover, road density)
+- Higher-resolution or multi-temporal satellite imagery
 
-Satellite imagery at fixed resolution did not add useful predictive signal
+---
 
-Multimodal model underperformed due to:
+## 🛠️ Technologies Used
 
-Weak visual signal
+- Python
+- Pandas, NumPy
+- Scikit-learn
+- PyTorch, Torchvision
+- OpenCV
+- Matplotlib
+- Mapbox Static Images API
 
-Generic pretrained CNN features
+---
 
-Increased model complexity
+## ▶️ How to Run
 
-These findings highlight the importance of strong baselines and honest reporting in data science projects.
-
-📌 Conclusion
-
-This project demonstrates an end-to-end multimodal machine learning pipeline for property valuation.
-While satellite imagery was hypothesized to improve predictions, experimental results show that structured housing attributes dominate price prediction in this dataset.
-
-Negative results are scientifically valuable and reinforce the importance of rigorous evaluation.
-
-🚀 Future Work
-
-Fine-tuning CNNs on real estate-specific imagery (GPU required)
-
-Residual modeling (predicting tabular residuals using images)
-
-Handcrafted visual features (green cover, road density)
-
-Higher-resolution or multi-temporal satellite images
-
-🛠️ Technologies Used
-
-Python
-
-Pandas, NumPy
-
-Scikit-learn
-
-PyTorch, Torchvision
-
-OpenCV
-
-Matplotlib
-
-Mapbox Static Images API
-
-▶️ How to Run
-1️⃣ Install dependencies
+### 1️⃣ Install dependencies
+```bash
 pip install -r requirements.txt
-
-2️⃣ Train baseline model
+2️⃣ Train tabular baseline
 python train_tabular_baseline.py
-
 3️⃣ Train multimodal model
 python train_multimodal.py
-
 4️⃣ Evaluate models
 python evaluate_multimodal.py
-
 5️⃣ Generate predictions
 python predict.py
-
-📄 Report
-
-The full project report is available as:
-
-23324001_report.pdf
-
 🏁 Final Note
 
 This project emphasizes:
@@ -178,8 +158,14 @@ End-to-end ML engineering
 
 Multimodal learning
 
+Strong baselines
+
 Scientific honesty
 
-Strong baseline comparison
+It reflects real-world data science practice, not just metric optimization.
 
-It reflects real-world data science practice, not just model optimization.
+
+
+
+
+
