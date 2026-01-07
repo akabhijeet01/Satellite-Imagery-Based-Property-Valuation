@@ -150,18 +150,14 @@ python train_multimodal.py
 python evaluate_multimodal.py
 5️⃣ Generate predictions
 python predict.py
+
+
 🏁 Final Note
-
 This project emphasizes:
-
 End-to-end ML engineering
-
 Multimodal learning
-
 Strong baselines
-
 Scientific honesty
-
 It reflects real-world data science practice, not just metric optimization.
 
 
